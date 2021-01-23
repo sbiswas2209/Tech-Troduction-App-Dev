@@ -10,12 +10,7 @@ class ItemService{
   Future<List<Task>> getTasks() async {
     SharedPreferences _prefs = await _sharedPreferences;
     List<String> tasksList = [];
-    try{
       tasksList = _prefs.getStringList('tasks') ?? [];
-    }
-    catch(e){
-      _prefs.setStringList('tasks', []);
-    }
     List<Task> tasks = [];
       tasksList.forEach((element) {
         Map<String , dynamic> data = jsonDecode(element);
@@ -23,6 +18,7 @@ class ItemService{
       });
     return tasks;
   }
+
 
   Future saveTask({@required String title, @required String content}) async {
     SharedPreferences _prefs = await _sharedPreferences;
